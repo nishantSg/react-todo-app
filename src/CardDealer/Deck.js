@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import Card from "./Card";
+import "./Deck.css";
 const API_URL_BASE = "https://deckofcardsapi.com/api/deck/";
 
 class Deck extends Component {
@@ -45,7 +46,7 @@ class Deck extends Component {
 		return (
 			<div>
 				<h1>Something</h1>
-				{cards}
+				<div className="Deck">{cards}</div>
 				<button onClick={this.getCard}>Get Card</button>
 			</div>
 		);

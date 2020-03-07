@@ -1,0 +1,33 @@
+.JokeList {
+	display: flex;
+	height: 80%;
+	width: 80%;
+}
+
+.JokeList-sidebar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #9575cd;
+	width: 30%;
+	border-radius: 0.5rem;
+}
+
+.JokeList-sidebar > h1 {
+	text-align: center;
+	color: white;
+}
+
+.JokeList-jokes {
+	padding: 0.5rem;
+	background-color: #fff;
+	align-self: center;
+	width: 70%;
+	height: 90%;
+	border-radius: 0.5rem;
+}
+
+.JokeList-sidebar img {
+	width: 70%;
+}
