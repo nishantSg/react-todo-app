@@ -13,8 +13,10 @@ class JokeList extends Component {
 	constructor(props) {
 		super();
 		this.state = {
+			loading: false,
 			jokes: JSON.parse(window.localStorage.getItem("jokes") || "[]")
 		};
+		this.seenJokes = new Set(this.state.map(joke => joke.text));
 	}
 	//
 	componentDidMount() {
@@ -22,19 +24,29 @@ class JokeList extends Component {
 	}
 	//
 	getJokes = async () => {
-		let jokesArr = [];
-		while (jokesArr.length < this.props.numberOfJokes) {
-			let response = await Axios.get(API_URL, {
-				headers: { Accept: "application/json" }
-			});
-			if (response.status === 200)
-				jokesArr.push({ id: uuidv4(), text: response.data.joke, votes: 0 });
+		try {
+			let jokesArr = [];
+			while (jokesArr.length < this.props.numberOfJokes) {
+				let response = await Axios.get(API_URL, {
+					headers: { Accept: "application/json" }
+				});
+				let joke = response.data.joke;
+				if (!this.seenJokes.has(joke)) {
+					jokesArr.push({ id: uuidv4(), text: joke, votes: 0 });
+				}
+			}
+			this.setState(
+				st => ({ jokes: [...st.jokes, ...jokesArr], loading: false }),
+				() =>
+					window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
+			);
+		} catch (error) {
+			alert(error);
 		}
-		this.setState(
-			st => ({ jokes: [...st.jokes, ...jokesArr] }),
-			() =>
-				window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
-		);
+	};
+	//
+	handleButtonClick = () => {
+		this.setState({ loading: true }, this.getJokes);
 	};
 	//
 	handleVotes = (id, delta) => {
@@ -50,6 +62,14 @@ class JokeList extends Component {
 	};
 	//
 	render() {
+		if (this.state.loading) {
+			return (
+				<div className="Loader">
+					<i className="fa fa-spinner fa-spin fa-4x" aria-hidden="true"></i>
+					<h1>Loading</h1>
+				</div>
+			);
+		}
 		return (
 			<div className="JokeList">
 				<div className="JokeList-sidebar">
@@ -60,7 +80,7 @@ class JokeList extends Component {
 						src="https://assets.dryicons.com/uploads/icon/svg/8927/0eb14c71-38f2-433a-bfc8-23d9c99b3647.svg"
 						alt="Laughing Emoji"
 					/>
-					<button className="Button" onClick={this.getJokes}>
+					<button className="Button" onClick={this.handleButtonClick}>
 						New Jokes
 					</button>
 				</div>

@@ -32,3 +32,8 @@
 .JokeList-sidebar img {
 	width: 70%;
 }
+
+.Loader {
+	text-align: center;
+	color: white;
+}
