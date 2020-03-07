@@ -1,13 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
+import Deck from "./CardDealer/Deck";
 import "./App.css";
-import Loader from "./ReactLifeCycle";
-import TodoList from "./TodoApp/TodoList";
 
 function App() {
 	return (
 		<div>
-			<TodoList />
+			<Deck />
 		</div>
 	);
 }
