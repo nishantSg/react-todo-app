@@ -1,0 +1,30 @@
+.Jokes {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 1rem;
+	border-bottom: 2px solid #eeeeee;
+}
+
+.JokeButtons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 1rem;
+}
+
+.Jokes-votes {
+	width: 50px;
+	height: 50px;
+	font-size: 1.2rem;
+	text-align: center;
+	line-height: 50px;
+	border: 2px solid red;
+	border-radius: 50%;
+	margin: 0 6px 0 6px;
+}
+
+.Joke-emoji {
+	margin-left: auto;
+	font-size: 2rem;
+}

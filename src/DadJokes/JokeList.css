@@ -26,6 +26,7 @@
 	width: 70%;
 	height: 90%;
 	border-radius: 0.5rem;
+	overflow: scroll;
 }
 
 .JokeList-sidebar img {
