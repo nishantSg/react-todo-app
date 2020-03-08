@@ -16,7 +16,7 @@ class JokeList extends Component {
 			loading: false,
 			jokes: JSON.parse(window.localStorage.getItem("jokes") || "[]")
 		};
-		this.seenJokes = new Set(this.state.map(joke => joke.text));
+		this.seenJokes = new Set(this.state.jokes.map(joke => joke.text));
 	}
 	//
 	componentDidMount() {
