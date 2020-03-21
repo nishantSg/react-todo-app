@@ -9,32 +9,36 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Checkbox from "@material-ui/core/Checkbox";
+import Divider from "@material-ui/core/Divider";
 
 const styles = {
 	root: {}
 };
 
 function TodoList(props) {
-	// const [classes, todo] = props;
+	const { classes, todos, removeTodo } = props;
 
-	return (
-		<List>
-			<ListItem>
+	const TodoList = todos.map(todo => (
+		<>
+			<ListItem key={todo.id}>
 				<ListItemIcon>
-					<Checkbox />
+					<Checkbox checked={todo.completed} />
 				</ListItemIcon>
-				<ListItemText>Something</ListItemText>
+				<ListItemText>{todo.task}</ListItemText>
 				<ListItemSecondaryAction>
 					<IconButton aria-label="edit-todo">
 						<EditIcon />
 					</IconButton>
 					<IconButton aria-label="delete-todo">
-						<DeleteIcon />
+						<DeleteIcon onClick={event => removeTodo(todo.id)} />
 					</IconButton>
 				</ListItemSecondaryAction>
 			</ListItem>
-		</List>
-	);
+			<Divider />
+		</>
+	));
+
+	return <List>{TodoList}</List>;
 }
 
 export default withStyles(styles)(TodoList);
