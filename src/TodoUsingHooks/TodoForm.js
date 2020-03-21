@@ -20,11 +20,12 @@ const styles = {
 	icon: {
 		padding: 10,
 		color: "grey"
-	}
+	},
+	Button: {}
 };
 
 function TodoForm(props) {
-	const [inputVal, setInputVal] = useFormInput("");
+	const [inputVal, setInputVal, reset] = useFormInput("");
 	const { classes } = props;
 	return (
 		<div>
@@ -36,7 +37,9 @@ function TodoForm(props) {
 					value={inputVal}
 					onChange={setInputVal}
 				/>
-				<Button color="primary">Clear</Button>
+				<Button className={classes.Button} color="primary" onClick={reset}>
+					Clear
+				</Button>
 				<Button color="primary">Save</Button>
 			</FormControl>
 		</div>

@@ -6,5 +6,9 @@ export default function useFormInput(initialVal = "") {
 	const handleChange = event => {
 		setValue(event.target.value);
 	};
-	return [value, handleChange];
+
+	const reset = () => {
+		setValue("");
+	};
+	return [value, handleChange, reset];
 }
