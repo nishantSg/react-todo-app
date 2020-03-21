@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TodoForm from "./TodoForm";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
@@ -14,7 +15,9 @@ export default function TodoApp() {
 			<Paper>
 				<Grid container justify="center">
 					<Grid item xs={11}>
-						<Paper>SomeText</Paper>
+						<Paper>
+							<TodoForm />
+						</Paper>
 					</Grid>
 				</Grid>
 			</Paper>
