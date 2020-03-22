@@ -23,6 +23,7 @@ const styles = {
 	ButtonContainer: {
 		width: "40%",
 		display: "flex",
+		flexDirection: "row",
 		justifyContent: "space-around",
 		alignItems: "center",
 	},
