@@ -9,7 +9,7 @@ export default function TodoApp() {
 	let todos = [
 		{ id: 1, task: "have to do something", completed: false },
 		{ id: 2, task: "have to do something", completed: false },
-		{ id: 3, task: "have to do something", completed: true }
+		{ id: 3, task: "have to do something", completed: true },
 	];
 
 	const [allTodos, setAllTodos] = useState(todos);
@@ -24,18 +24,36 @@ export default function TodoApp() {
 		setAllTodos(newTodos);
 	};
 
+	const toggleTodo = id => {
+		const updatedTodos = allTodos.map(todo =>
+			todo.id === id ? { ...todo, completed: !todo.completed } : todo
+		);
+		setAllTodos(updatedTodos);
+	};
+
+	const editTodo = (id, task) => {
+		const newTodo = allTodos.map(todo => {
+			if (todo.id === id) {
+				return { ...todo, task };
+			}
+			return todo;
+		});
+		setAllTodos(newTodo);
+	};
+
 	return (
-		<div>
-			<Paper>
-				<Grid container justify="center">
-					<Grid item xs={11}>
-						<Paper>
-							<TodoForm />
-							<TodoList todos={allTodos} removeTodo={removeTodo} />
-						</Paper>
-					</Grid>
-				</Grid>
-			</Paper>
-		</div>
+		<Grid container justify="center">
+			<Grid item xs={11} md={8} lg={6}>
+				<Paper>
+					<TodoForm addTodo={addTodo} />
+					<TodoList
+						todos={allTodos}
+						removeTodo={removeTodo}
+						toggleTodo={toggleTodo}
+						editTodo={editTodo}
+					/>
+				</Paper>
+			</Grid>
+		</Grid>
 	);
 }

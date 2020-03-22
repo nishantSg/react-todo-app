@@ -2,12 +2,8 @@ import React from "react";
 import useFormInput from "./hooks/FormControl";
 // import TextField from '@material-ui/core/TextField';
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
-import Divider from "@material-ui/core/Divider";
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import InputLabel from "@material-ui/core/InputLabel";
+import SaveIcon from "@material-ui/icons/Save";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import Button from "@material-ui/core/Button";
 
@@ -15,33 +11,64 @@ const styles = {
 	root: {
 		display: "flex",
 		flexDirection: "row",
-		alignItems: "center"
+		alignItems: "center",
+		justifyContent: "space-around",
+		paddingLeft: "8px",
+		paddingRight: "8px",
 	},
 	icon: {
-		padding: 10,
-		color: "grey"
+		margin: 10,
+		color: "grey",
 	},
-	Button: {}
+	ButtonContainer: {
+		width: "40%",
+		display: "flex",
+		justifyContent: "space-around",
+		alignItems: "center",
+	},
 };
 
 function TodoForm(props) {
 	const [inputVal, setInputVal, reset] = useFormInput("");
-	const { classes } = props;
+	const { classes, addTodo } = props;
+
+	const addAndUpdate = event => {
+		event.preventDefault();
+		addTodo(inputVal);
+		reset();
+	};
 	return (
 		<div>
-			<FormControl className={classes.root}>
+			<form className={classes.root} onSubmit={addAndUpdate}>
 				<FormatListBulletedIcon className={classes.icon} />
 				<InputBase
 					placeholder="New Todo"
 					id="new-todo-input"
 					value={inputVal}
 					onChange={setInputVal}
+					fullWidth
 				/>
-				<Button className={classes.Button} color="primary" onClick={reset}>
-					Clear
-				</Button>
-				<Button color="primary">Save</Button>
-			</FormControl>
+				<div className={classes.ButtonContainer}>
+					<Button
+						className={classes.Button}
+						color="primary"
+						onClick={reset}
+						size="small"
+					>
+						Clear
+					</Button>
+					<Button
+						type="submit"
+						variant="contained"
+						color="primary"
+						className={classes.Button}
+						size="small"
+						startIcon={<SaveIcon />}
+					>
+						Save
+					</Button>
+				</div>
+			</form>
 		</div>
 	);
 }

@@ -1,44 +1,33 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import Todo from "./Todo.js";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import Checkbox from "@material-ui/core/Checkbox";
-import Divider from "@material-ui/core/Divider";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
-	root: {}
+	root: {
+		padding: 0,
+		margin: 0,
+	},
 };
 
 function TodoList(props) {
-	const { classes, todos, removeTodo } = props;
+	const { todos, removeTodo, toggleTodo, editTodo, classes } = props;
 
-	const TodoList = todos.map(todo => (
-		<>
-			<ListItem key={todo.id}>
-				<ListItemIcon>
-					<Checkbox checked={todo.completed} />
-				</ListItemIcon>
-				<ListItemText>{todo.task}</ListItemText>
-				<ListItemSecondaryAction>
-					<IconButton aria-label="edit-todo">
-						<EditIcon />
-					</IconButton>
-					<IconButton aria-label="delete-todo">
-						<DeleteIcon onClick={event => removeTodo(todo.id)} />
-					</IconButton>
-				</ListItemSecondaryAction>
+	const listItems = todos.map(todo => (
+		<div key={todo.id}>
+			<ListItem dense divider className={classes.root}>
+				<Todo
+					todo={todo}
+					removeTodo={removeTodo}
+					toggleTodo={toggleTodo}
+					editTodo={editTodo}
+				/>
 			</ListItem>
-			<Divider />
-		</>
+		</div>
 	));
 
-	return <List>{TodoList}</List>;
+	return <List className={classes.root}>{listItems}</List>;
 }
 
 export default withStyles(styles)(TodoList);
