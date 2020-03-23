@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import useFormInput from "./hooks/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
+import { TodoContext } from "./context/firstContext";
 
 const styles = {
 	root: {
@@ -14,8 +15,10 @@ const styles = {
 };
 
 function EditTodo(props) {
-	const { task, id, editTodo, setEditing, classes } = props;
+	const { task, id, setEditing, classes } = props;
 	const [value, setValue, reset] = useFormInput(task);
+	const { editTodo } = useContext(TodoContext);
+
 	const updateTodo = event => {
 		event.preventDefault();
 		editTodo(id, value);
@@ -28,7 +31,7 @@ function EditTodo(props) {
 			<TextField
 				value={value}
 				onChange={setValue}
-				vaiant="filled"
+				variant="filled"
 				fullWidth
 				label="Edit Todo"
 			/>

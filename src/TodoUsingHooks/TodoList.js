@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Todo from "./Todo.js";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { withStyles } from "@material-ui/core/styles";
+import { TodoContext } from "./context/firstContext";
 
 const styles = {
 	root: {
@@ -12,17 +13,13 @@ const styles = {
 };
 
 function TodoList(props) {
-	const { todos, removeTodo, toggleTodo, editTodo, classes } = props;
+	const { classes } = props;
+	const { allTodos } = useContext(TodoContext);
 
-	const listItems = todos.map(todo => (
+	const listItems = allTodos.map(todo => (
 		<div key={todo.id}>
 			<ListItem dense divider className={classes.root}>
-				<Todo
-					todo={todo}
-					removeTodo={removeTodo}
-					toggleTodo={toggleTodo}
-					editTodo={editTodo}
-				/>
+				<Todo todo={todo} />
 			</ListItem>
 		</div>
 	));

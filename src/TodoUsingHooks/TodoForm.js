@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import useFormInput from "./hooks/FormControl";
 // import TextField from '@material-ui/core/TextField';
 import { withStyles } from "@material-ui/core/styles";
@@ -6,6 +6,7 @@ import InputBase from "@material-ui/core/InputBase";
 import SaveIcon from "@material-ui/icons/Save";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import Button from "@material-ui/core/Button";
+import { TodoContext } from "./context/firstContext";
 
 const styles = {
 	root: {
@@ -31,7 +32,8 @@ const styles = {
 
 function TodoForm(props) {
 	const [inputVal, setInputVal, reset] = useFormInput("");
-	const { classes, addTodo } = props;
+	const { classes } = props;
+	const { addTodo } = useContext(TodoContext);
 
 	const addAndUpdate = event => {
 		event.preventDefault();

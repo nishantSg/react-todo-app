@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import TodoListEdit from "./TodoListEdit";
 import { withStyles } from "@material-ui/core/styles";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Checkbox from "@material-ui/core/Checkbox";
+import { TodoContext } from "./context/firstContext";
 
 const styles = {
 	root: {
@@ -22,15 +23,11 @@ const styles = {
 
 function Todo(props) {
 	const [editing, setEditing] = useState(false);
-	const { todo, removeTodo, toggleTodo, editTodo, classes } = props;
+	const { todo, classes } = props;
+	const { removeTodo, toggleTodo } = useContext(TodoContext);
 
 	const markupToBeReturned = editing ? (
-		<TodoListEdit
-			task={todo.task}
-			id={todo.id}
-			editTodo={editTodo}
-			setEditing={setEditing}
-		/>
+		<TodoListEdit task={todo.task} id={todo.id} setEditing={setEditing} />
 	) : (
 		<>
 			<ListItemIcon>
