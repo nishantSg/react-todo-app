@@ -6,7 +6,7 @@ import InputBase from "@material-ui/core/InputBase";
 import SaveIcon from "@material-ui/icons/Save";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import Button from "@material-ui/core/Button";
-import { TodoContext } from "./context/firstContext";
+import { TodoMethoodContext } from "./context/firstContext";
 
 const styles = {
 	root: {
@@ -33,11 +33,11 @@ const styles = {
 function TodoForm(props) {
 	const [inputVal, setInputVal, reset] = useFormInput("");
 	const { classes } = props;
-	const { addTodo } = useContext(TodoContext);
+	const dispatch = useContext(TodoMethoodContext);
 
 	const addAndUpdate = event => {
 		event.preventDefault();
-		addTodo(inputVal);
+		dispatch({ type: "ADD", task: inputVal });
 		reset();
 	};
 	return (

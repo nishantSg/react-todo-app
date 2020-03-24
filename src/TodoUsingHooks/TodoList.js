@@ -14,14 +14,14 @@ const styles = {
 
 function TodoList(props) {
 	const { classes } = props;
-	const { allTodos } = useContext(TodoContext);
+	const state = useContext(TodoContext);
 
-	const listItems = allTodos.map(todo => (
-		<div key={todo.id}>
+	const listItems = state.map(todo => (
+		<React.Fragment key={todo.id}>
 			<ListItem dense divider className={classes.root}>
 				<Todo todo={todo} />
 			</ListItem>
-		</div>
+		</React.Fragment>
 	));
 
 	return <List className={classes.root}>{listItems}</List>;

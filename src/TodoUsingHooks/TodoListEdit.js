@@ -17,11 +17,11 @@ const styles = {
 function EditTodo(props) {
 	const { task, id, setEditing, classes } = props;
 	const [value, setValue, reset] = useFormInput(task);
-	const { editTodo } = useContext(TodoContext);
+	const dispatch = useContext(TodoContext);
 
 	const updateTodo = event => {
 		event.preventDefault();
-		editTodo(id, value);
+		dispatch({ type: "EDIT", id: id, task: value });
 		setEditing(false);
 		reset();
 	};

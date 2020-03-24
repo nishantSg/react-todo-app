@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Checkbox from "@material-ui/core/Checkbox";
-import { TodoContext } from "./context/firstContext";
+import { TodoMethoodContext } from "./context/firstContext";
 
 const styles = {
 	root: {
@@ -24,7 +24,7 @@ const styles = {
 function Todo(props) {
 	const [editing, setEditing] = useState(false);
 	const { todo, classes } = props;
-	const { removeTodo, toggleTodo } = useContext(TodoContext);
+	const dispatch = useContext(TodoMethoodContext);
 
 	const markupToBeReturned = editing ? (
 		<TodoListEdit task={todo.task} id={todo.id} setEditing={setEditing} />
@@ -33,7 +33,7 @@ function Todo(props) {
 			<ListItemIcon>
 				<Checkbox
 					checked={todo.completed}
-					onClick={event => toggleTodo(todo.id)}
+					onClick={event => dispatch({ type: "TOGGLE", id: todo.id })}
 				/>
 			</ListItemIcon>
 			<ListItemText primary={todo.task} className={classes.root} />
@@ -43,7 +43,7 @@ function Todo(props) {
 				</IconButton>
 				<IconButton
 					aria-label="delete-todo"
-					onClick={event => removeTodo(todo.id)}
+					onClick={event => dispatch({ type: "REMOVE", id: todo.id })}
 				>
 					<DeleteIcon />
 				</IconButton>

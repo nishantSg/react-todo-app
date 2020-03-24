@@ -24,7 +24,7 @@ function useTodo(todos) {
 	const editTodo = (id, task) => {
 		const newTodo = allTodos.map(todo => {
 			if (todo.id === id) {
-				return { ...todo, task };
+				return { ...todo, task: task };
 			}
 			return todo;
 		});
